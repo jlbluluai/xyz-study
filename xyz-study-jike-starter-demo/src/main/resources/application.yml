@@ -1,0 +1,8 @@
+spring:
+  auto:
+    bean:
+      kclass:
+        enable: true
+      student:
+        id: 1
+        name: xyz
