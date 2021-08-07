@@ -40,6 +40,18 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.66.Final</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.xyz.study</groupId>
             <artifactId>xyz-study-jike-starter-demo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
