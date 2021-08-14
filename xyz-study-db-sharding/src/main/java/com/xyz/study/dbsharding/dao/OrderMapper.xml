@@ -45,6 +45,7 @@
             create_time    = #{createTime,jdbcType=BIGINT},
             update_time    = #{updateTime,jdbcType=BIGINT}
         where id = #{id,jdbcType=BIGINT}
+        and uid = #{uid}
     </update>
 
     <select id="selectListByUid" resultMap="BaseResultMap">
@@ -63,4 +64,10 @@
         and id = #{id}
         and uid = #{uid}
     </select>
+
+    <delete id="delete">
+        delete
+        from t_order
+        where id = #{id}
+    </delete>
 </mapper>

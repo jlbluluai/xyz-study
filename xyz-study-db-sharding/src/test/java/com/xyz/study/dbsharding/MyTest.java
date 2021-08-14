@@ -20,20 +20,25 @@ public class MyTest extends BaseTest {
 //        List<Order> orders = orderService.query(10001);
 //        System.out.println(orders);
 
-//        Order order = orderService.query(10001, 2);
-//        System.out.println(order);
-
-        Order order = new Order();
-        order.setUid(100001L);
-        order.setProductId(1L);
-        order.setProductAmount(1);
-        order.setOrderStatus(0);
-        order.setOrderPrice(1L);
-        order.setCreateTime(System.currentTimeMillis());
-        order.setUpdateTime(System.currentTimeMillis());
-        orderService.add(order);
-
+        Order order = orderService.query(100001, 633370312214679552L);
         System.out.println(order);
+
+        orderService.delete(633370312214679552L);
+
+        order = orderService.query(100001, 633370312214679552L);
+        System.out.println(order);
+
+//        Order order = new Order();
+//        order.setUid(100001L);
+//        order.setProductId(1L);
+//        order.setProductAmount(1);
+//        order.setOrderStatus(0);
+//        order.setOrderPrice(1L);
+//        order.setCreateTime(System.currentTimeMillis());
+//        order.setUpdateTime(System.currentTimeMillis());
+//        orderService.add(order);
+//
+//        System.out.println(order);
     }
 
 }

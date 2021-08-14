@@ -28,4 +28,12 @@ public class OrderService {
     public void add(Order order){
         orderMapper.insert(order);
     }
+
+    public void update(Order order){
+        orderMapper.updateByPrimaryKey(order);
+    }
+
+    public void delete(long id){
+        orderMapper.delete(id);
+    }
 }

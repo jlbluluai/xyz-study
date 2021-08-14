@@ -15,4 +15,6 @@ public interface OrderMapper {
     List<Order> selectListByUid(@Param("uid") long uid);
 
     Order selectByUidAndId(@Param("uid") long uid, @Param("id") long id);
+
+    int delete(@Param("id") long id);
 }
