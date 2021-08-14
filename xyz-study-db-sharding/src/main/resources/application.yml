@@ -1,0 +1,56 @@
+spring:
+  shardingsphere:
+    # sharding-jdbc数据源
+    datasource:
+      common:
+        type : com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      names: ds0,ds1
+      # 0号
+      ds0:
+        jdbcUrl: jdbc:mysql://localhost:3306/ds_0?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+        password: 123456
+        username: root
+      # 1号
+      ds1:
+        jdbcUrl: jdbc:mysql://localhost:3306/ds_1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+        password: 123456
+        username: root
+    # 规则
+    rules:
+      sharding:
+        sharding-algorithms:
+          algorithm1:
+            type: INLINE
+            props:
+              algorithm-expression: ds$->{uid % 2}
+              allow-range-query-with-inline-sharding: false
+          algorithm2:
+            type: MOD
+            props:
+              sharding-count: 16
+        key-generators:
+          key1:
+            type: SNOWFLAKE
+            props:
+              worker-id: 345
+              max-vibration-offset: 15
+        tables:
+          t_order:
+            actual-data-nodes: ds$->{0..1}.t_order_$->{0..15}
+            key-generate-strategy:
+              column: id
+              key-generator-name: key1
+            # 按用户id取模分库
+            database-strategy:
+              standard:
+                sharding-column: uid
+                sharding-algorithm-name: algorithm1
+            # 按订单id取模分表
+            table-strategy:
+              standard:
+                sharding-algorithm-name: algorithm2
+                sharding-column: id
+    # 属性
+    props:
+      sql-show: true
