@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyz.study.hmily.demo.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.xyz.study.hmily.demo.domain.Order">
+    <!--@mbg.generated-->
+    <!--@Table t_order-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="product_amount" jdbcType="INTEGER" property="productAmount" />
+    <result column="order_status" jdbcType="TINYINT" property="orderStatus" />
+    <result column="order_price" jdbcType="BIGINT" property="orderPrice" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `uid`, product_id, product_amount, order_status, order_price, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xyz.study.hmily.demo.domain.Order" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_order (`uid`, product_id, product_amount, 
+      order_status, order_price, create_time, 
+      update_time)
+    values (#{uid,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{productAmount,jdbcType=INTEGER}, 
+      #{orderStatus,jdbcType=TINYINT}, #{orderPrice,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xyz.study.hmily.demo.domain.Order">
+    <!--@mbg.generated-->
+    update t_order
+    set `uid` = #{uid,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      product_amount = #{productAmount,jdbcType=INTEGER},
+      order_status = #{orderStatus,jdbcType=TINYINT},
+      order_price = #{orderPrice,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
