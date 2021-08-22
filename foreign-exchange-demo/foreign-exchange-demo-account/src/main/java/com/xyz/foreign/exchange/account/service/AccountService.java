@@ -42,7 +42,11 @@ public class AccountService implements AccountInterface, InitializingBean {
     @Override
     public void tryRollbackTransfer(TransferRollbackVO paramVO) {
         accountServiceMap.get(paramVO.getFromCurrency()).tryRollbackTransfer(paramVO);
-        accountServiceMap.get(paramVO.getToCurrency()).tryRollbackTransfer(paramVO);
+
+        AbstractAccountService to = accountServiceMap.get(paramVO.getToCurrency());
+        to.tryRollbackTransfer(paramVO);
+        // 交易对手的冻结账户也得尝试删除
+        to.tryDelFreeze(paramVO.getToUid(), paramVO.getExchangeId());
     }
 
     @Override

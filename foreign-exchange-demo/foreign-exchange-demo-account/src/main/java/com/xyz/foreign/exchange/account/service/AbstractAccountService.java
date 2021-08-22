@@ -14,5 +14,10 @@ public abstract class AbstractAccountService implements AccountInterface {
      */
     public abstract CurrencyEnum getCurrencyEnum();
 
+    /**
+     * 尝试删除冻结
+     */
+    public abstract void tryDelFreeze(long uid,long exchangeId);
+
 
 }

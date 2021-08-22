@@ -47,4 +47,13 @@
     and exchange_id = #{exchangeId}
     and status = #{status}
   </select>
+
+  <update id="del">
+    update t_freeze_dollar
+    set del_flag = 1,
+      update_time = #{now}
+    where del_flag =0
+    and uid = #{uid}
+    and exchange_id = #{exchangeId}
+  </update>
 </mapper>

@@ -14,4 +14,5 @@ public interface FreezeRmbMapper {
 
     FreezeRmb selectByStatus(@Param("uid") long uid, @Param("exchangeId") long exchangeId, @Param("status") int status);
 
+    int del(@Param("uid") long uid, @Param("exchangeId") long exchangeId, @Param("now") long now);
 }

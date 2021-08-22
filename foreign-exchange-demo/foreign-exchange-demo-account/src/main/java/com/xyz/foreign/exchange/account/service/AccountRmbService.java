@@ -40,6 +40,11 @@ public class AccountRmbService extends AbstractAccountService {
         return CurrencyEnum.RMB;
     }
 
+    @Override
+    public void tryDelFreeze(long uid, long exchangeId) {
+        freezeRmbMapper.del(uid, exchangeId, System.currentTimeMillis());
+    }
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void transfer(TransferVO paramVO) {

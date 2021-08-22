@@ -13,4 +13,6 @@ public interface FreezeDollarMapper {
     int updateStatus(@Param("uid") long uid, @Param("exchangeId") long exchangeId, @Param("status") int status, @Param("now") long now);
 
     FreezeDollar selectByStatus(@Param("uid") long uid, @Param("exchangeId") long exchangeId, @Param("status") int status);
+
+    int del(@Param("uid") long uid, @Param("exchangeId") long exchangeId, @Param("now") long now);
 }

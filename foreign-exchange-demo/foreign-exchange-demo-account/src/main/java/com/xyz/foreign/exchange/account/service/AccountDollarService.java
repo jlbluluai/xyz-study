@@ -40,6 +40,11 @@ public class AccountDollarService extends AbstractAccountService {
         return CurrencyEnum.DOLLAR;
     }
 
+    @Override
+    public void tryDelFreeze(long uid, long exchangeId) {
+        freezeDollarMapper.del(uid, exchangeId, System.currentTimeMillis());
+    }
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void transfer(TransferVO paramVO) {
