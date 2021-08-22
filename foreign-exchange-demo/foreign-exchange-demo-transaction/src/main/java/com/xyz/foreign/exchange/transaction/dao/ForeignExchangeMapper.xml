@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyz.foreign.exchange.transaction.dao.ForeignExchangeMapper">
+  <resultMap id="BaseResultMap" type="com.xyz.foreign.exchange.transaction.domain.ForeignExchange">
+    <!--@mbg.generated-->
+    <!--@Table t_foreign_exchange-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="from_uid" jdbcType="BIGINT" property="fromUid" />
+    <result column="from_out_currency" jdbcType="TINYINT" property="fromOutCurrency" />
+    <result column="from_out_amount" jdbcType="BIGINT" property="fromOutAmount" />
+    <result column="from_in_currency" jdbcType="TINYINT" property="fromInCurrency" />
+    <result column="from_in_amount" jdbcType="BIGINT" property="fromInAmount" />
+    <result column="exchange_rate" jdbcType="VARCHAR" property="exchangeRate" />
+    <result column="to_uid" jdbcType="BIGINT" property="toUid" />
+    <result column="exchange_status" jdbcType="TINYINT" property="exchangeStatus" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, from_uid, from_out_currency, from_out_amount, from_in_currency, from_in_amount, 
+    exchange_rate, to_uid,
+    exchange_status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_foreign_exchange
+    where id = #{id,jdbcType=BIGINT} and del_flag = 0
+  </select>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xyz.foreign.exchange.transaction.domain.ForeignExchange" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_foreign_exchange (from_uid, from_out_currency, from_out_amount, 
+      from_in_currency, from_in_amount, exchange_rate, 
+      to_uid, exchange_status,
+      create_time, update_time)
+    values (#{fromUid,jdbcType=BIGINT}, #{fromOutCurrency,jdbcType=TINYINT}, #{fromOutAmount,jdbcType=BIGINT}, 
+      #{fromInCurrency,jdbcType=TINYINT}, #{fromInAmount,jdbcType=BIGINT}, #{exchangeRate,jdbcType=VARCHAR}, 
+      #{toUid,jdbcType=BIGINT}, #{exchangeStatus,jdbcType=TINYINT},
+      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xyz.foreign.exchange.transaction.domain.ForeignExchange">
+    <!--@mbg.generated-->
+    update t_foreign_exchange
+    set from_uid = #{fromUid,jdbcType=BIGINT},
+      from_out_currency = #{fromOutCurrency,jdbcType=TINYINT},
+      from_out_amount = #{fromOutAmount,jdbcType=BIGINT},
+      from_in_currency = #{fromInCurrency,jdbcType=TINYINT},
+      from_in_amount = #{fromInAmount,jdbcType=BIGINT},
+      exchange_rate = #{exchangeRate,jdbcType=VARCHAR},
+      to_uid = #{toUid,jdbcType=BIGINT},
+      exchange_status = #{exchangeStatus,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

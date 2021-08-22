@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyz.foreign.exchange.account.dao.FreezeDollarMapper">
+  <resultMap id="BaseResultMap" type="com.xyz.foreign.exchange.account.domain.FreezeDollar">
+    <!--@mbg.generated-->
+    <!--@Table t_freeze_dollar-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="amount" jdbcType="BIGINT" property="amount" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="exchange_id" jdbcType="BIGINT" property="exchangeId" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `uid`, amount, exchange_id, `status`, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_freeze_dollar
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xyz.foreign.exchange.account.domain.FreezeDollar" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_freeze_dollar (`uid`, amount, exchange_id, `status`,
+      create_time, update_time)
+    values (#{uid,jdbcType=BIGINT}, #{amount,jdbcType=BIGINT}, #{exchangeId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER},
+      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT})
+  </insert>
+
+  <update id="updateStatus">
+    update t_freeze_dollar
+    set status =  #{status},
+    update_time = #{now}
+    where uid = #{uid} and exchange_id = #{exchangeId}
+  </update>
+
+  <select id="selectByStatus" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_freeze_dollar
+    where del_flag =0
+    and uid = #{uid}
+    and exchange_id = #{exchangeId}
+    and status = #{status}
+  </select>
+</mapper>

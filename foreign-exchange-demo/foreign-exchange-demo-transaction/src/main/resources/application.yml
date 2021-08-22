@@ -1,0 +1,31 @@
+server:
+  port: 8088
+  
+spring:
+  application:
+    name: foreign-exchange-demo-transaction
+  datasource:
+    username: root
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    password: 123456
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+
+dubbo:
+  scan:
+    base-packages: com.xyz.foreign.exchange.transaction
+  protocol:
+    name: dubbo
+    port: 20881
+  registry:
+    address: zookeeper://localhost:2181
+  metadata-report:
+    address: zookeeper://localhost:2181
+  application:
+    qosEnable: true
+    qosPort: 22222
+    qosAcceptForeignIp: true
+    qos-enable-compatible: true
+    qos-host-compatible: localhost
+    qos-port-compatible: 22222
+    qos-accept-foreign-ip-compatible: true
+    qos-host: localhost
