@@ -3,6 +3,7 @@ package com.xyz.study.common.utils;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.apache.pdfbox.io.IOUtils;
 
 import java.io.*;
 import java.util.Arrays;
@@ -135,6 +136,7 @@ public class FileUtils {
 
     /**
      * 获取一个目录下所有文件的名字
+     *
      * @param path 路径
      * @return 文件名列表
      */
@@ -160,5 +162,45 @@ public class FileUtils {
         }
         return StringUtils.EMPTY;
     }
+
+    /**
+     * 扫描出一个目录下所有的文件名
+     */
+    public static List<String> scanDirectory(String directory) {
+        File file = new File(directory);
+        if (!file.exists()) {
+            throw new IllegalArgumentException("目录不存在");
+        }
+        if (!file.isDirectory()) {
+            throw new IllegalArgumentException("请传入目录");
+        }
+
+        String[] files = file.list();
+        if (files == null || files.length == 0) {
+            return Collections.emptyList();
+        }
+
+        return Arrays.stream(files).collect(Collectors.toList());
+    }
+
+    /**
+     * 拷贝
+     */
+    public static void copy(String source, String target) {
+        File sourceFile = new File(source);
+        File targetFile = new File(target);
+
+        if (!sourceFile.exists()) {
+            throw new IllegalArgumentException("源文件不存在");
+        }
+
+        try (FileInputStream fis = new FileInputStream(sourceFile);
+             FileOutputStream fos = new FileOutputStream(targetFile)) {
+            IOUtils.copy(fis, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
