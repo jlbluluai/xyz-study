@@ -1,6 +1,7 @@
 package com.xyz.study.common.work;
 
 import com.xyz.study.common.utils.FileUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -69,6 +70,9 @@ public class Month9Task_1 {
             } else {
                 // 不处理
             }
+
+            String join = StringUtils.join(inUserIds, ",");
+            FileUtils.writeToLocal("/Users/zhuweijie/filehome/上汽", "111.txt", join);
 
             // 匹配身份证更新生日
             try {
